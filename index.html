@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,400i,500,500i,600,600i,700,700i&amp;subset=latin-ext">
+    <!-- <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css"> -->
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/fontawesome.min.css"> -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://unpkg.com/grapesjs/dist/css/grapes.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/grapesjs@0.14.49/dist/grapes.js"></script>
+    <style>
+        body,
+        html {
+              height: 100%;
+              margin: 0;
+        }
+
+    </style>
+  </head>
+  <body>
+<div id="gjs" style="height:0px; overflow:hidden">
+  <div style="margin:100px 100px 25px; padding:25px; font:caption"> This is a sample text</div>
+    <div style="margin:100px 100px 25px; padding:25px; font:caption"> This is 2nd sample text</div>
+    <h1>Hello</h1>
+    <img src="https://images.unsplash.com/photo-1628191079308-6183b016b3df?crop=entropy&cs=srgb&fm=jpg&ixid=MnwyNjAzNTl8MXwxfGFsbHwxfHx8fHx8Mnx8MTYzMjgyMzg1Mg&ixlib=rb-1.2.1&q=80&w=1080" alt="">
+    <img src="https://images.unsplash.com/photo-1593643946890-b5b85ade6451?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyNjAzNTl8MXwxfGFsbHw2fHx8fHx8Mnx8MTYzMjgyMzg1Mg&ixlib=rb-1.2.1&q=80&w=1080" alt=""> -->
+</div>
+
+
+<script type="text/javascript">
+    // alert('Start');
+
+
+    var editor = grapesjs.init({
+        height: '100%',
+        showOffsets: 1,
+        noticeOnUnload: 0,
+        storageManager: {autoload: 0},
+        container: '#gjs',
+        fromElement: true,
+
+        plugins: ['gjs-blocks-basic', 'gjs-plugin-actions', 'example-plugin'],
+        assetManager: {
+           // custom: true,
+           // Upload endpoint, set `false` to disable upload, default `false`
+          // upload: 0,
+          // The name used in POST to pass uploaded files, default: `'files'`
+         assets: [
+           'http://placehold.it/350x250/78c5d6/fff/image1.jpg',
+              // Pass an object with your properties
+              {
+                type: 'image',
+                src: 'http://placehold.it/350x250/459ba8/fff/image2.jpg',
+                height: 350,
+                width: 250,
+                name: 'First Image'
+              },
+              {
+                // As the 'image' is the base type of assets, omitting it will
+                // be set as `image` by default
+                src: 'http://placehold.it/350x250/79c267/fff/image3.jpg',
+                height: 350,
+                width: 250,
+                name: 'Second Image'
+              },
+    ],
+    },
+        pluginsOpts: {
+            'gjs-plugin-actions': {},
+            'gjs-blocks-basic': {
+                flexGrid: 1
+            }
+        }
+    });
+    window.editor = editor;
+    const blockManager = editor.BlockManager;
+    editor.on('load', () => {
+      editor.BlockManager.render([
+        bm.get('column1').set('category', ''),
+        bm.get('column2').set('category', ''),
+        bm.get('column3').set('category', ''),
+        bm.get('text').set('category', ''),
+        bm.get('image').set('category', '')
+      ])
+    });
+    blockManager.add('h1-block', {
+  label: 'Heading',
+  content: '<h1>Put your title here</h1>',
+  category: 'Basic',
+  attributes: {
+    title: 'Insert h1 block'
+  }
+});
+blockManager.add('image-block', {
+label: 'Image',
+content: '<img src="http://placehold.it/350x250/78c5d6/fff/image1.jpg" style="max-width:100%">',
+category: 'Basic',
+attributes: {
+title: 'Insert Image block'
+}
+});
+
+//
+blockManager.add('paragraph-block', {
+label: 'Paragraph Text',
+content: '<p>Paragraph text goes here</p>',
+category: 'Basic',
+attributes: {
+title: 'Insert Paragraph block'
+}
+});
+
+//Adding Empty Div Component
+// blockManager.add('div-block', {
+// label: 'Empty Div',
+// content: '<div></div>',
+// category: 'Basic',
+// attributes: {
+// title: 'Insert Div Block'
+// }
+// });
+
+    // grapesjs.plugins.add('example-plugin', function(editor, options) {
+    //     // remove the devices switcher
+    //     editor.getConfig().showDevices = false;
+    //     editor.getConfig().allowScripts = 0;
+    //
+    //
+    //     // console.log(editor.getConfig());
+    //     // remove the view code
+    //     // editor.Panels.removeButton("views", "open-layers");
+    //     // editor.Panels.removeButton('options', 'export-template');
+    //     // editor.Panels.removeButton('views', 'open-blocks');
+    //     // editor.Panels.removeButton('views', 'open-tm');
+    //     // editor.Panels.removeButton('views', 'sw-visibility');
+    //
+    //     editor.Panels.addButton('options', [ { id: 'undo', className: 'fa fa-undo', command: function(e) { e.runCommand('core:undo') }}]);
+    //     editor.Panels.addButton('options', [ { id: 'redo', className: 'fa fa-repeat', command: function(e) { e.runCommand('core:redo') }}]);
+    //
+    //
+    // })
+    // alert('end');
+</script>
+
+
+  </body>
+</html>
